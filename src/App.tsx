@@ -21,8 +21,10 @@ import perlinFlow from "./collections/2020/perlin flow/";
 import sines from "./collections/2020/sines/";
 import noise from "./collections/2020/noise/";
 import genesis from "./collections/2020/genesis/";
+import iso from "./collections/2021/iso/";
 
 const collections = [
+  { title: "digital city", year: 2021, photos: iso },
   { title: "center", year: 2021, photos: center },
   { title: "ghost voices", year: 2021, photos: ghostvoices },
   { title: "rush", year: 2021, photos: rush },
@@ -32,18 +34,18 @@ const collections = [
   { title: "flame", year: 2021, photos: flame },
   { title: "feather", year: 2021, photos: feather },
   { title: "warp", year: 2021, photos: warp },
-  { title: "deeper", year: 2021, photos: deeper},
-  { title: "fragile", year: 2021, photos: fragile},
-  { title: "planet b", year: 2021, photos: planetB},
-  { title: "fractals II", year: 2021, photos: fractalsII},
-  { title: "cellular", year: 2021, photos: cellular},
-  { title: "fractals", year: 2020, photos: fractals},
-  { title: "domain warp", year: 2020, photos: domainWarp},
-  { title: "perlin flow", year: 2020, photos: perlinFlow},
-  { title: "sines", year: 2020, photos: sines},
-  { title: "noise", year: 2020, photos: noise},
-  { title: "genesis", year: 2020, photos: genesis},
-]
+  { title: "deeper", year: 2021, photos: deeper },
+  { title: "fragile", year: 2021, photos: fragile },
+  { title: "planet b", year: 2021, photos: planetB },
+  { title: "fractals II", year: 2021, photos: fractalsII },
+  { title: "cellular", year: 2021, photos: cellular },
+  { title: "fractals", year: 2020, photos: fractals },
+  { title: "domain warp", year: 2020, photos: domainWarp },
+  { title: "perlin flow", year: 2020, photos: perlinFlow },
+  { title: "sines", year: 2020, photos: sines },
+  { title: "noise", year: 2020, photos: noise },
+  { title: "genesis", year: 2020, photos: genesis },
+];
 
 function App() {
   const [currentImage, setCurrentImage] = useState(0);
@@ -64,30 +66,33 @@ function App() {
 
   return (
     <div>
-      {collections.map((c, collIdx) => (<div>
-        {/* <h1>{c.title}.{c.year}</h1> */}
-        <div>&nbsp;</div>
-        <Gallery photos={c.photos} onClick={(e, p) => openLightbox(e, p, collIdx)} />
-        
-      </div>))}
+      {collections.map((c, collIdx) => (
+        <div>
+          {/* <h1>{c.title}.{c.year}</h1> */}
+          <div>&nbsp;</div>
+          <Gallery
+            photos={c.photos}
+            onClick={(e, p) => openLightbox(e, p, collIdx)}
+          />
+        </div>
+      ))}
       <ModalGateway>
-          {viewerIsOpen ? (
-            <Modal onClose={closeLightbox}>
-              <Carousel
-                currentIndex={currentImage}
-                views={collections[currentCollection].photos.map(x => ({
-                  ...x,
-                  source: x.src,
-                  srcset: x.srcset,
-                  caption: x.caption
-                }))}
-              />
-            </Modal>
-          ) : null}
-        </ModalGateway>
-      
+        {viewerIsOpen ? (
+          <Modal onClose={closeLightbox}>
+            <Carousel
+              currentIndex={currentImage}
+              views={collections[currentCollection].photos.map((x) => ({
+                ...x,
+                source: x.src,
+                srcset: x.srcset,
+                caption: x.caption,
+              }))}
+            />
+          </Modal>
+        ) : null}
+      </ModalGateway>
     </div>
   );
 }
 
-export default App
+export default App;
